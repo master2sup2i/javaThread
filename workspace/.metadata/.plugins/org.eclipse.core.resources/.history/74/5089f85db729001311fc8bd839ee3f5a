@@ -1,0 +1,18 @@
+package ProdConsoExo6;
+
+public class Buffer {
+    private int valeur;
+    private boolean consommer = false;
+    
+    public int get() {
+        while (consommer == false) {}
+            consommer = true;
+            return valeur;
+    }
+    
+    public void put(int i) {
+    	while (consommer) {}
+    		valeur = i;
+    		consommer = false;
+    }  
+}

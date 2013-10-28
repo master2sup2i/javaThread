@@ -1,0 +1,23 @@
+
+public class MainTT {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		    int[] t = {5, 8, 3, 2, 7, 10, 1, 9};
+		    TrierThread trieur = new TrierThread(t,2,9);
+		    trieur.start();
+		    for (int i = 0; i <t.length; i++) {
+		      System.out.print(t[i] + " ; ");
+		    }
+		    System.out.println();
+		    t = new int[] {25, 36, 6, 25, 3, 26, 8};
+		    for (int i = 0; i <t.length; i++) {
+		      System.out.print(t[i] + " ; ");
+		    }    
+		  }
+
+	}
+
+
