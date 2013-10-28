@@ -1236,3 +1236,24 @@ java.io.IOException: Unable to resolve plug-in "platform:/plugin/org.eclipse.dat
 
 !ENTRY org.eclipse.ui 4 4 2013-10-28 11:18:57.074
 !MESSAGE Conflicting handlers for org.eclipse.ui.file.properties: {ActionHandler(org.eclipse.ui.dialogs.PropertyDialogAction@68a16345)} vs {ActionHandler(org.eclipse.ui.dialogs.PropertyDialogAction@3b7c7cad)}
+
+!ENTRY org.eclipse.ui 4 4 2013-10-28 11:24:13.164
+!MESSAGE Conflicting handlers for org.eclipse.ui.project.closeProject: {ActionHandler(org.eclipse.ui.actions.CloseResourceAction@290bb0b2)} vs {ActionHandler(org.eclipse.ui.actions.CloseResourceAction@3e7d8b2b)}
+
+!ENTRY org.eclipse.ui 4 4 2013-10-28 11:24:13.194
+!MESSAGE Conflicting handlers for org.eclipse.ui.edit.copy: {ActionHandler(org.eclipse.ui.actions.TextActionHandler$CopyActionHandler@6dd540e1)} vs {ActionHandler(org.eclipse.jdt.internal.ui.refactoring.reorg.CopyToClipboardAction@4acf2cca)}
+
+!ENTRY org.eclipse.ui 4 4 2013-10-28 11:24:13.202
+!MESSAGE Conflicting handlers for org.eclipse.ui.edit.delete: {ActionHandler(org.eclipse.ui.actions.TextActionHandler$DeleteActionHandler@23b7ac72)} vs {ActionHandler(org.eclipse.jdt.internal.ui.refactoring.reorg.DeleteAction@131c5530)}
+
+!ENTRY org.eclipse.ui 4 4 2013-10-28 11:24:13.264
+!MESSAGE Conflicting handlers for org.eclipse.ui.edit.move: {ActionHandler(org.eclipse.jdt.ui.actions.MoveAction@3cce994a)} vs {ActionHandler(org.eclipse.ui.actions.MoveResourceAction@9ba0e9c)}
+
+!ENTRY org.eclipse.ui 4 4 2013-10-28 11:24:13.265
+!MESSAGE Conflicting handlers for org.eclipse.ui.edit.rename: {ActionHandler(org.eclipse.jdt.ui.actions.RenameAction@2cfd38f6)} vs {ActionHandler(org.eclipse.ui.actions.RenameResourceAction@3a65b814)}
+
+!ENTRY org.eclipse.ui 4 4 2013-10-28 11:24:15.963
+!MESSAGE Conflicting handlers for org.eclipse.ui.project.closeProject: {ActionHandler(org.eclipse.ui.actions.CloseResourceAction@3e7d8b2b)} vs {ActionHandler(org.eclipse.ui.actions.CloseResourceAction@290bb0b2)}
+
+!ENTRY org.eclipse.ui 4 4 2013-10-28 11:24:17.998
+!MESSAGE Conflicting handlers for org.eclipse.jdt.ui.edit.text.java.open.editor: {ActionHandler(org.eclipse.jdt.ui.actions.OpenAction@7ba3a24e)} vs {ActionHandler(org.eclipse.jdt.ui.actions.OpenAction@33f4ee4c)}
