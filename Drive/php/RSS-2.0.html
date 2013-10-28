@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="fr"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<meta charset="UTF-8">
+<title>RSS 2.0, spécification par Harvard, traduction française stricte</title><style type="text/css">
+   pre.idl { border:solid thin; background:#eee; color:#000; padding:0.5em }
+   pre.idl :link, pre.idl :visited { color:inherit; background:transparent }
+   div.example { margin-left:1em; padding-left:1em; border-left:double; color:#222; background:#fcfcfc }
+   p.note { margin-left:2em; font-weight:bold; font-style:italic; color:#008000 }
+   p.note::before { content:"Note: " }
+   p.issue { padding:.5em; border:solid #f00 }
+   p.issue::before { content:"Issue: " }
+   em.ct { text-transform:lowercase; font-variant:small-caps; font-style:normal }
+   dfn { font-weight:bold; font-style:normal }
+   code { color: rgb(255, 69, 0); }
+   code :link, code :visited { color:inherit }
+  </style><link rel="stylesheet" type="text/css" href="RSS-2.0_fichiers/base.css">
+  </head>
+  <body>
+  <div class="head"> 
+
+  <h1 class="head">RSS 2.01</h1>
+  <h3 class="no-num no-toc">Spécification de Harvard. Version française: 
+    <a href="http://www.scriptol.fr/rss/" target="_parent" title="Programmation du Web et SEO">Scriptol.fr</a></h3>
+  <p class="no-num no-toc">Traducteur: <strong>Denis Sureau</strong></p>
+  <p>Document original par <strong>Dave Winer</strong> à <a href="http://cyber.law.harvard.edu/rss/rss.html" target="_parent">Harvard</a>.</p>
+</div><div style="border-bottom:1px solid #666;margin-top:8px; margin-bottom:8px;"></div><h2>Résumé</h2><div class="section"> 
+  <p>La spécification du format RSS 2.01 par Harvard. Elle est compatible 
+    avec les versions .91 et .92. Elle n'a rien à voir avec la version 
+    1.0 qui est un format RDF de syndication ni avec le format Atom de l'IETF. 
+    Ce document s'adresse aux auteurs de logiciels désirant générer 
+    des fichiers RSS ou afficher des flux, ainsi qu'à toute personne désirant 
+    se documenter sur le format.<br></p>
+  
+ </div><div class="section">
+  <h2>Statut de ce Document</h2>
+  <p> Ce document n'est pas une spécification du W3C. Il n'existe aucune 
+    spécification de syndication au W3C. Le W3C a spécifié 
+    le format XML à la base du présent format, ainsi que le format 
+    RDF à la base de la version 1.0.<br>
+    Le présent document est sous licence Creative Common. Permission est 
+    donnée de l'imprimer et le distribuer pourvu que le nom de l'auteur 
+    et du traducteur, ainsi que les URL, ne soient ni supprimés ni modifiés 
+    . </p>
+  <p style="font-size:80%; color:#666; border-bottom:1px dotted #666;">La traduction débute ci-dessous<br></p>
+
+  </div><div class="section">
+  <h2>Table des matières</h2>
+  
+  <ul class="toc"><li><a href="#Introduction">1. Qu'est-ce que RSS?</a></li>
+    <ul><li><a href="#Exemples">1.1. Exemples de fichiers</a></li>
+    </ul><li>2. <a href="#Sujet">Au sujet de ce document</a></li>
+    <li><a href="#Channel">3. Eléments de channel</a></li>
+    <ul><li><a href="#Channel-Requis">3.1. Eléments requis</a></li>
+      <li><a href="#Channel-Option">3.2. Eléments optionnels</a></li>
+    </ul><li><a href="#Item">4. Eléments d'item</a></li>
+    <li><a href="#Commentaire">5. Commentaires</a></li>
+    <li><a href="#Futur">6. Etendre RSS</a></li>
+    <li><a href="#Futur">7. Carnet de route</a></li>
+    <li><a href="#Licence">8. Licence</a></li>
+  </ul></div><div> 
+  <h2><a name="Introduction"></a>1. Qu'est-ce que RSS</h2>
+  
+  <p>RSS est un format de syndication de contenu Web.</p>
+  <p>Son nom est l'acronyme de Really Simple Syndication.</p>
+  <p>RSS est un dialecte de XML. Tous les fichiers RSS doivent être conformes 
+    à la <a href="http://www.w3.org/TR/REC-xml/" target="_parent">spécification</a> 
+    XML 1.0, qui est publiée sur le site web du World Wide Web Consortium 
+    (W3C).</p>
+  <p>Un résumé de l'<a href="http://cyber.law.harvard.edu/rss/rssVersionHistory.html%20" target="_parent">historique 
+    des versions</a> de RSS.</p>
+  <p>Au premier niveau, un document RSS est un élément &lt;rss&gt;, 
+    avec un attribut version obligatoire, qui précise à quelle version 
+    de RSS ce document se conforme. S'il se conforme à cette spécification, 
+    l'attribut version doit être 2.0.</p>
+  <p>Subordonné à l'élément &lt;rss&gt;, il y a un 
+    seul élément channel, qui contient l'information au sujet du 
+    canal (les méta données) et son contenu.</p>
+  <h3><a name="Exemples"></a>1.1. Exemples de fichiers</h3>
+  <p>Voici des exemples pour: RSS <a href="http://cyber.law.harvard.edu/blogs/gems/tech/sampleRss091.xml">0.91</a>, 
+    <a href="http://cyber.law.harvard.edu/blogs/gems/tech/sampleRss092.xml">0.92</a> 
+    et <a href="http://cyber.law.harvard.edu/blogs/gems/tech/rss2sample.xml">2.0</a>.</p>
+  <p>Noter que les fichiers d'exemples peuvent pointer sur des documents ou des 
+    services qui n'existent plus. L'exemple .91 a été créé 
+    lorsque les docs .91 ont été écrites. Ce serait une bonne 
+    idée de maintenir une liste d'exemples.</p>
+  <h2><a name="Sujet"></a>2. Au sujet de ce document</h2>
+  <p>Ce document représente l'état de RSS sur la fin de 2002, en 
+    version 2.0.1. <br><br>
+    Il incorpore toutes les modifications et additions, depuis la spécification 
+    de base pour <a href="http://backend.userland.com/rss091">RSS 0.91</a> (Juin 
+    2000) et inclut de nouvelles fonctionnalités introduites dans <a href="http://backend.userland.com/rss092">RSS 
+    0.92</a> (Décembre 2000) et RSS 0.94 (Août 2002). <br><br>
+    Les notes de modification de trouvent <a href="http://cyber.law.harvard.edu/rss/rssChangeNotes.html%20">ici</a>.<br><br>
+    D'abord, nous documentons les sous éléments requis et optionnels 
+    de &lt;channel&gt;; puis les sous éléments de &lt;item&gt;. Les sections 
+    finales répondent aux questions fréquemment posées, et 
+    fournissent un carnet de route pour les évolutions futures, et les 
+    instructions pour étendre RSS.</p>
+  <h2><a name="Channel"></a>3. Eléments de channel</h2>
+  <h3><a name="Channel-Requis"></a>3.1. Eléments requis</h3>
+  <p>Voici la liste des éléments de channel requis, chacun avec 
+    une brève description, un exemple, et lorsqu'elle existe un pointeur 
+    sur une description plus complète.<br></p>
+  <table cellspacing="10"><tbody><tr><td><b>Elément</b></td>
+      <td width="45%"><b>Description</b></td>
+      <td><b>Exemple</b></td>
+    </tr><tr><td valign="top">title</td>
+      <td valign="top">Le nom du canal. C'est ainsi que l'on réfère 
+        à vôtre service. Si vous avez un site web HTML qui contient 
+        la même information que votre fichier RSS, le titre de votre canal 
+        devrait être le même que le titre du site. </td>
+      <td valign="top">GoUpstate.com News Headlines</td>
+    </tr><tr><td valign="top">link</td>
+      <td valign="top">L'URL de votre site web HTML correspondant au canal.</td>
+      <td valign="top">http://www.goupstate.com/</td>
+    </tr><tr><td height="2" valign="top">description&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+      <td height="2" valign="top">Phrase or sentence décrivant le canal.</td>
+      <td height="2" valign="top">Les dernières nouvelles de GoUpstate.com, 
+        un site Web du Spartanburg Herald-Journal.</td>
+    </tr></tbody></table><br><br><b></b> 
+  <h3><a name="Channel-Option"></a>3.2. Eléments optionnels</h3>
+  <p>Voila une liste des éléments optionnels de channel.<br></p>
+  <table cellspacing="10"><tbody><tr><td><b>Elément</b></td>
+      <td width="65%"><b>Description</b></td>
+      <td><b>Exemple</b></td>
+    </tr><tr><td valign="top">language</td>
+      <td valign="top">Le langage dans lequel est écrit le canal. Ceci 
+        permet aux aggrégateurs de regrouper tous les sites de langue italienne, 
+        par exemple, sur une même page. Une liste des valeurs possibles 
+        pour cet élément, telle que fournie par Netscape, est <a href="http://blogs.law.harvard.edu/tech/stories/storyReader%2415">ici</a>. 
+        Vous pouvez aussi utiliser les <a href="http://www.w3.org/TR/REC-html40/struct/dirlang.html#langcodes">valeurs 
+        définies</a> par le W3C.</td>
+      <td valign="top">en-US, fr-FR</td>
+    </tr><tr><td valign="top">copyright</td>
+      <td valign="top">Notice de copyright pour le contenu du canal.</td>
+      <td valign="top">Copyright 2002, Spartanburg Herald-Journal</td>
+    </tr><tr><td valign="top">managingEditor</td>
+      <td valign="top">Adresse email de la personne responsable du contenu éditorial.</td>
+      <td valign="top">geo@herald.com (George Matesky)</td>
+    </tr><tr><td valign="top">webMaster</td>
+      <td valign="top">Adresse email de la personne responsable des problèmes 
+        techniques relatifs au canal.</td>
+      <td valign="top">betty@herald.com (Betty Guernsey)</td>
+    </tr><tr><td valign="top">pubDate</td>
+      <td valign="top">La date de publication du contenu du canal. Par exemple, 
+        le New York Times publiant sur une base quotidienne, la date de publication 
+        change toutes les 24 heures. C'est alors que le pubDate de channel change. 
+        Toutes les dates et temps de RSS se conforment à la Spécification 
+        Date et Temps de <a href="http://asg.web.cmu.edu/rfc/rfc822.html">RFC 
+        822</a>, à l'exception que l'année peut être représentée 
+        par deux ou quatre caractères (quatre de préférence).</td>
+      <td valign="top">Sat, 07 Sep 2002 00:00:01 GMT</td>
+    </tr><tr><td valign="top">lastBuildDate</td>
+      <td valign="top">La dernière date où le contenu du canal a 
+        changé.</td>
+      <td valign="top">Sat, 07 Sep 2002 09:42:31 GMT</td>
+    </tr><tr><td valign="top">category</td>
+      <td valign="top">Spécifie une catégorie ou plusieurs auxquelles 
+        correspond le canal. Suit les mêmes règles que l'élément 
+        <a href="#ltcategorygtSubelementOfLtitemgt">category</a> du niveau 
+        &lt;item&gt;. Plus d'<a href="#syndic8">informations</a>.</td>
+      <td valign="top">&lt;category&gt;Newspapers&lt;/category&gt;</td>
+    </tr><tr><td valign="top">generator</td>
+      <td valign="top">Une chaîne indiquant le programme utilisé 
+        pour générer le canal.</td>
+      <td valign="top">MightyInHouse Content System v2.3</td>
+    </tr><tr><td valign="top">docs</td>
+      <td valign="top">Une URL pointant sur la documentation du format utilisé 
+        pour le fichier RSS. C'est probablement un pointeur sur cette page. C'est 
+        pour les gens qui achopperont sur un fichier RSS sur un serveur dans 25 
+        ans d'ici et se demanderont ce que c'est.</td>
+      <td valign="top">http://cyber.law.harvard.edu/tech/rss</td>
+    </tr><tr><td height="72" valign="top">cloud</td>
+      <td height="72" valign="top">Permet aux processus pour enregistrer en nuage 
+        d'être notifiés des mises à jour du canal, en implémentant 
+        un protocole de flux RSS publier-souscrire léger. Plus d'informations 
+        <a href="#ltcloudgtSubelementOfLtchannelgt">ici</a>.</td>
+      <td height="72" valign="top">&lt;cloud domain="rpc.sys.com" port="80" path="/RPC2" 
+        registerProcedure="pingMe" protocol="soap"/&gt;</td>
+    </tr><tr><td valign="top">ttl</td>
+      <td valign="top">ttl représente la durée de vie. C'est un 
+        nombre de minutes qui indique combien de temps un canal peut être 
+        gardé en mémoire cache avant rafraîchissement à 
+        la source. Plus d'information <a href="#ltttlgtSubelementOfLtchannelgt">ici</a>.</td>
+      <td valign="top">&lt;ttl&gt;60&lt;/ttl&gt;</td>
+    </tr><tr><td valign="top">image</td>
+      <td valign="top">Spécifie une image GIF, JPEG ou PNG qui ne peut 
+        pas être affichée avec le canal. Plus d'information <a href="#ltimagegtSubelementOfLtchannelgt">ici</a>.</td>
+      <td valign="top"></td>
+    </tr><tr><td valign="top">rating</td>
+      <td valign="top">La côte <a href="http://www.w3.org/PICS/">PICS</a> 
+        pour le canal.</td>
+      <td valign="top"></td>
+    </tr><tr><td valign="top">textInput</td>
+      <td valign="top">Spécifie une champ d'entrée de texte qui 
+        ne peut pas être affiché avec le canal. Plus d'information 
+        <a href="#lttextinputgtSubelementOfLtchannelgt">ici</a>.</td>
+      <td valign="top"></td>
+    </tr><tr><td valign="top">skipHours</td>
+      <td valign="top">Un indice pour les aggrégateurs leur indiquant combien 
+        d'heures peuvent être sautées. Plus d'information <a href="http://cyber.law.harvard.edu/rss/skipHoursDays.html#skiphours">ici</a>.</td>
+      <td valign="top"></td>
+    </tr><tr><td height="2" valign="top">skipDays</td>
+      <td height="2" valign="top">Un indice pour les aggrégateurs leur 
+        indiquant combien de jours peuvent être sautés. Plus d'information 
+        <a href="http://cyber.law.harvard.edu/rss/skipHoursDays.html">ici</a>.</td>
+      <td height="2" valign="top"></td>
+    </tr></tbody></table><br><br><b>&lt;image&gt; sous élément de &lt;channel&gt;<a name="ltimagegtSubelementOfLtchannelgt">&nbsp;</a><a href="#ltimagegtSubelementOfLtchannelgt" title="Permanent link to '&lt;image&gt; sub-element of &lt;channel&gt;' in archive."><img src="RSS-2.0_fichiers/leftarrow.gif" border="0" height="9" width="11"></a></b><br><br>
+  &lt;image&gt; est un sous élément optionnel de &lt;channel&gt;, qui 
+  contient trois sous élément requis et trois autres optionnels.<br><br>
+  &lt;url&gt; est l'URL d'une image GIF, JPEG ou PNG qui représente la canal. 
+  <br><br>
+  &lt;title&gt; décrit l'image, il est utilisé par l'attribut ALT de 
+  la balise HTML &lt;img&gt; quand le canal est rendu en HTML. <br><br>
+  &lt;link&gt; est l'URL du site, quand le canal est affiché, l'image est 
+  un lien sur le site. (Note, en pratique les &lt;title&gt; et &lt;link&gt; d'image 
+  devraient avoir la même valeur que les &lt;title&gt; et &lt;link&gt; du canal. 
+  <br><br>
+  Les éléments optionnels incluent &lt;width&gt; et &lt;height&gt;, nombres 
+  , indiquant la largeur et la hauteur de l'image en pixels. &lt;description&gt; 
+  contenant le texte inclut dans l'attribut TITLE du lien formé autour 
+  de l'image dans le rendu HTML.<br><br>
+  La valeur maximale de largeur est 144, la valeur par défaut est 88. <br><br>
+  La valeur maximale de hauteur est 400, la valeur par défaut est 31.<br><br><b>&lt;cloud&gt; sous élément de &lt;channel&gt;<a name="ltcloudgtSubelementOfLtchannelgt">&nbsp;</a><a href="#ltcloudgtSubelementOfLtchannelgt" title="Permanent link to '&lt;cloud&gt; sub-element of &lt;channel&gt;' in archive."><img src="RSS-2.0_fichiers/leftarrow.gif" border="0" height="9" width="11"></a></b><br><br>
+  &lt;cloud&gt; est un sous élément optionnel de &lt;channel&gt;. <br><br>
+  Il spécifie un service web qui supporte l'interface rssCloud interface 
+  qui peut être implémentée en HTTP-POST, XML-RPC ou SOAP 
+  1.1. <br><br>
+  Son but est de permettre aux traitements d'enregistrer comme "nuage" 
+  pour être notifiés des mises à jour du canal, par l'implémentation 
+  légère d'un protocole de flux RSS publier ou souscrire.<br><br><code>&lt;cloud domain="rpc.sys.com" port="80" path="/RPC2" registerProcedure="myCloud.rssPleaseNotify" 
+  protocol="xml-rpc" /&gt;</code><br><br>
+  Dans cet exemple, pour requérir une notification du canal ou il apparaît, 
+  vous devriez envoyer un message XML-RPC à rpc.sys.com sur le port 80, 
+  avec chemin /RPC2. La procédure à appeler est myCloud.rssPleaseNotify.<br><br>
+  Une explication complète de cet élément et de l'interface 
+  rssCloud est <a href="http://cyber.law.harvard.edu/rss/soapMeetsRss.html#rsscloudInterface" target="_parent">ici</a>.<br><br><b>&lt;ttl&gt; sous élément de &lt;channel&gt;<a name="ltttlgtSubelementOfLtchannelgt">&nbsp;</a><a href="#ltttlgtSubelementOfLtchannelgt" title="Permanent link to '&lt;ttl&gt; sub-element of &lt;channel&gt;' in archive."><img src="RSS-2.0_fichiers/leftarrow.gif" border="0" height="9" width="11"></a></b><br><br>
+  &lt;ttl&gt; est un sous élément optionnel de &lt;channel&gt;. <br><br>
+  ttl est là pour le temps d'existence. C'est un nombre de minutes qui 
+  indique combien de temps un canal peut demeurer en mémoire cache avant 
+  qu'elle ne soit rafraîchie à partir de la source. Cela fait qu'il 
+  est possible aux sources RSS d'être générés par un 
+  réseau en partage de fichiers tel que Gnutella. 
+  (N.d.T: Site fermé). <br>
+  <br>
+  Exemple: &lt;ttl&gt;60&lt;/ttl&gt;<br><br><b>&lt;textInput&gt; sous élément de &lt;channel&gt;<a name="lttextinputgtSubelementOfLtchannelgt">&nbsp;</a><a href="#lttextinputgtSubelementOfLtchannelgt" title="Permanent link to '&lt;textInput&gt; sub-element of &lt;channel&gt;' in archive."><img src="RSS-2.0_fichiers/leftarrow.gif" border="0" height="9" width="11"></a></b><br><br>
+  Un canal peut optionnellement contenir un sous élément &lt;textInput&gt;, 
+  qui contient quatre sous éléments requis.<br><br>
+  &lt;title&gt; -- Le libellé du bouton Submit (soumettre) dans la zone d'entrée 
+  de texte. <br><br>
+  &lt;description&gt; -- Décrit la zone d'entrée de texte. <br><br>
+  &lt;name&gt; -- Le nom de l'objet texte dans la zone d'entrée de texte. 
+  <br><br>
+  &lt;link&gt; -- L'URL du script CGI qui traite les requêtes d'entrée 
+  de texte. <br><br>
+  Le but de cet élément &lt;textInput&gt; à quelque chose de 
+  mystérieux. Vous pouvez l'utiliser pour spécifier une boite de 
+  moteur de recherche. Pour permettre à un lecteur de fournir une réponse. 
+  La plupart des aggrégateurs l'ignorent.<br><br><b></b> 
+  <h2><a name="Item"></a>4. Eléments d'item</h2>
+  <p>Un canal peut contenir tout nombre de &lt;item&gt;s. Un item peut représenter 
+    une "histoire" -- plutôt comme une histoire de journal ou de magazine; 
+    de sorte que sa description soit le synopsis de l'histoire, et que le lien 
+    pointe sur l'histoire entière. Un item peut aussi est lui-même 
+    complet, de sorte que sa description contienne le texte (HTML codé 
+    entité est permis, voir <a href="http://cyber.law.harvard.edu/rss/encodingDescriptions.html%20">exemples</a>), 
+    et le lien et le titre peuvent être omis. Tous les éléments 
+    d'un item sont optionnels, toutefois au moins le titre ou la description doivent 
+    être présents.<br><br></p>
+  <table cellspacing="10"><tbody><tr><td><b>Element</b></td>
+      <td><b>Description</b></td>
+      <td width="50%"><b>Exemple</b></td>
+    </tr><tr><td valign="top">title</td>
+      <td valign="top">Le titre d'item.</td>
+      <td valign="top">Venice Film Festival Tries to Quit Sinking</td>
+    </tr><tr><td valign="top">link</td>
+      <td valign="top">L'URL de l'item.</td>
+      <td valign="top">http://nytimes.com/2004/12/07FEST.html</td>
+    </tr><tr><td height="44" valign="top">description&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+      <td height="44" valign="top">Le synopsis de l'item.</td>
+      <td height="44" valign="top"><description>Quelques unes des discussions 
+        les plus chaudes au festival du film de Venise cette semaine concernaient 
+        la manière dont l'arrivée des stars au Palazzo del Cinema 
+        a été mise en scène.</description></td>
+    </tr><tr><td valign="top">author</td>
+      <td valign="top">Adresse email de l'auteur de l'item. <a href="#ltauthorgtSubelementOfLtitemgt">Plus</a>.</td>
+      <td valign="top"></td>
+    </tr><tr><td valign="top">category</td>
+      <td valign="top">Place l'item dans une ou plusieurs catégories. <a href="#ltcategorygtSubelementOfLtitemgt">Plus</a>.</td>
+      <td valign="top"></td>
+    </tr><tr><td valign="top">comments</td>
+      <td valign="top">URL de la page de commentaires concernant l'item. <a href="#ltcommentsgtSubelementOfLtitemgt">Plus</a>.</td>
+      <td valign="top"></td>
+    </tr><tr><td valign="top">enclosure</td>
+      <td valign="top">Décrit un objet média attaché à 
+        l'item. <a href="#ltenclosuregtSubelementOfLtitemgt">Plus</a>.</td>
+      <td valign="top"></td>
+    </tr><tr><td valign="top">guid</td>
+      <td valign="top">Une chaîne qui identifie l'item de façon unique. 
+        <a href="#ltguidgtSubelementOfLtitemgt">Plus</a>.</td>
+      <td valign="top"></td>
+    </tr><tr><td valign="top">pubDate</td>
+      <td valign="top">Indique quand l'item a été publié. 
+        <a href="#ltpubdategtSubelementOfLtitemgt">Plus</a>.</td>
+      <td valign="top"></td>
+    </tr><tr><td valign="top">source</td>
+      <td valign="top">Le canal RSS d'ou vient l'item. <a href="#ltsourcegtSubelementOfLtitemgt">Plus</a>.</td>
+      <td valign="top"></td>
+    </tr></tbody></table><br><br><b>&lt;source&gt; sous élément de &lt;item&gt;<a name="ltsourcegtSubelementOfLtitemgt">&nbsp;</a><a href="#ltsourcegtSubelementOfLtitemgt" title="Permanent link to '&lt;source&gt; sub-element of &lt;item&gt;' in archive."><img src="RSS-2.0_fichiers/leftarrow.gif" border="0" height="9" width="11"></a></b><br><br>
+  &lt;source&gt; est un sous élément optionnel de &lt;item&gt;.<br><br>
+  Sa valeur est le nom du canal RSS d'où vient l'item, dérivée 
+  de son &lt;title&gt;. Il a un attribut requis, url, qui lie sur la XML-isation 
+  du source.<br><br><code>&lt;source url="http://www.tomalak.org/links2.xml"&gt;Tomalak's Realm&lt;/source&gt;</code><br><br>
+  La finalité de cet élément est de propager le crédit 
+  des liens, de faire la publicité des sources d'items de news. Il peut 
+  être utilisé dans la commande Post d'un aggrégateur. Il 
+  devrait être généré automatiquement lors de l'envoi 
+  d'un item d'un aggrégateur à un outil de gestion de weblog.<br><br><b>&lt;enclosure&gt; sous élément de &lt;item&gt;<a name="ltenclosuregtSubelementOfLtitemgt">&nbsp;</a><a href="#ltenclosuregtSubelementOfLtitemgt" title="Permanent link to '&lt;enclosure&gt; sub-element of &lt;item&gt;' in archive."><img src="RSS-2.0_fichiers/leftarrow.gif" border="0" height="9" width="11"></a></b><br><br>
+  &lt;enclosure&gt; est un sous élément de &lt;item&gt;.<br><br>
+  Il a trois attributs requis. url indique où est localisée l'enclosure, 
+  length indique quelle est la taille en octets, et type indique quel est le type, 
+  un des types MIME standards.<br><br>
+  L'url doit être une URL http.<br><br><code>&lt;enclosure url="http://www.scripting.com/mp3s/weatherReportSuite.mp3" 
+  length="12216320" type="audio/mpeg" /&gt;</code><br><br>
+  Un développement sur cet élément pour le cas de l'utilisateur 
+  se trouve <a href="http://www.scriptol.fr/rss/payloads-for-RSS.html" target="_parent">ici</a>. (NdT: le document original a été supprimé mais retrouvé et stocké ici). <br>
+  <br><b>&lt;category&gt; sous élément de &lt;item&gt;<a name="ltcategorygtSubelementOfLtitemgt">&nbsp;</a><a href="#ltcategorygtSubelementOfLtitemgt" title="Permanent link to '&lt;category&gt; sub-element of &lt;item&gt;' in archive."><img src="RSS-2.0_fichiers/leftarrow.gif" border="0" height="9" width="11"></a></b><br><br>
+  &lt;category&gt; est un sous élément optionnel de &lt;item&gt;.<br><br>
+  Il a un attribut optionnel, domain, une chaîne qui identifie une taxonomie 
+  de catégorisation. <br><br>
+  La valeur de l'élément est une chaîne où le séparateur 
+  est un slash qui identifie une localisation hiérarchique dans la taxonomie 
+  désignée. Les agents de traitement peuvent établir des 
+  conventions pour l'interprétation des catégories. Deux exemples 
+  sont fournis ci-dessous:<br><br><code>&lt;category&gt;Grateful Dead&lt;/category&gt;</code><br><br><code>&lt;category domain="http://www.fool.com/cusips"&gt;MSFT&lt;/category&gt;</code><br><br>
+  Vous pouvez inclure autant de catégories d'éléments qu'il 
+  vous en faut, en différents domaines, et avoir un item référencé 
+  de façon croisée dans différentes parts du même domaine.<br><br><b>&lt;pubDate&gt; sous élément de &lt;item&gt;<a name="ltpubdategtSubelementOfLtitemgt">&nbsp;</a><a href="#ltpubdategtSubelementOfLtitemgt" title="Permanent link to '&lt;pubDate&gt; sub-element of &lt;item&gt;' in archive."><img src="RSS-2.0_fichiers/leftarrow.gif" border="0" height="9" width="11"></a></b><br><br>
+  &lt;pubDate&gt; est un sous élément optionnel de &lt;item&gt;.<br><br>
+  Sa valeur est une <a href="http://asg.web.cmu.edu/rfc/rfc822.html">date</a>, 
+  indiquant quand l'item a été publié. Sil s'agit d'une date 
+  située dans le futur, les aggrégateurs peuvent choisir de ne pas 
+  afficher l'item avant cette date. <br><br><code>&lt;pubDate&gt;Sun, 19 May 2012 15:21:36 GMT&lt;/pubDate&gt;</code><br><br><b>&lt;guid&gt; sous élément de &lt;item&gt;<a name="ltguidgtSubelementOfLtitemgt">&nbsp;</a><a href="#ltguidgtSubelementOfLtitemgt" title="Permanent link to '&lt;guid&gt; sub-element of &lt;item&gt;' in archive."><img src="RSS-2.0_fichiers/leftarrow.gif" border="0" height="9" width="11"></a></b><br><br>
+  &lt;guid&gt; est un sous élément optionnel de &lt;item&gt;.<br><br>
+  guid est là comme identifieur global unique. C'est une chaîne qui 
+  identifie l'item de façon unique. Quand elle est présente, un 
+  aggrégateur peut choisir de l'utiliser pour déterminer si l'item 
+  est nouveau.<br><br><code>&lt;guid&gt;http://some.server.com/weblogItem3207&lt;/guid&gt;</code><br><br>
+  Il n'y a pas de règle de syntaxe pour un guid. Les aggrégateurs 
+  peuvent les voir comme une chaîne. Il appartient à la source du 
+  flux d'établir l'unicité de la chaîne. <br><br>
+  Si l'attribut guid a un attribut nommé "isPermaLink" avec une valeur 
+  true (vraie), le lecteur peut considérer qu'il s'agit du permalien de 
+  l'item, autrement dit, une url qui peut être ouverte par un navigateur, 
+  qui pointe sur l'item complet décrit par l'élément &lt;item&gt;. 
+  Un exemple:<br><br><code>&lt;guid isPermaLink="true"&gt;http://inessential.com/2002/09/01.php#a2&lt;/guid&gt;</code><br><br>
+  isPermaLink est optionnel, sa valeur par défaut est true. Si sa valeur 
+  est false (faux), le guid ne peut pas être considéré comme 
+  une url, ou l'url vers quelque chose en particulier.<br><br><b>&lt;comments&gt; sous élément de </b><b>&lt;item&gt;<a name="ltcommentsgtSubelementOfLtitemgt">&nbsp;</a><a href="#ltcommentsgtSubelementOfLtitemgt" title="Permanent link to '&lt;comments&gt; sub-element of &lt;item&gt;' in archive."><img src="RSS-2.0_fichiers/leftarrow.gif" border="0" height="9" width="11"></a></b><br><br>
+  &lt;comments&gt; est un sous élément optionnel de &lt;item&gt;.<br><br>
+  S'il est présent, c'est l'url de la page de commentaire de l'item. <br><br><code>&lt;comments&gt;http://ekzemplo.com/entry/4403/comments&lt;/comments&gt;</code><br><br>
+  Plus d'information sur les commentaires <a href="http://backend.userland.com/weblogComments">ici</a>.<br><br><b>&lt;author&gt; sous élément de</b> <b>&lt;item&gt;<a name="ltauthorgtSubelementOfLtitemgt">&nbsp;</a><a href="#ltauthorgtSubelementOfLtitemgt" title="Permanent link to '&lt;author&gt; sub-element of &lt;item&gt;' in archive."><img src="RSS-2.0_fichiers/leftarrow.gif" border="0" height="9" width="11"></a></b><br><br>
+  &lt;author&gt; est un sous élément optionnel de &lt;item&gt;.<br><br>
+  C'est l'adresse email de l'auteur de l'item. Pour la syndication de journaux 
+  et magazines par RSS, l'auteur est la personne qui a écrit l'article 
+  que &lt;item&gt; décrit. Pour les weblogs collaboratifs, l'auteur de l'item 
+  pourrait ne pas être le responsable d'édition ni le webmaster. 
+  Pour un weblog réalisé par un seul individu il serait pertinent 
+  d'omettre l'élément &lt;author&gt;.<br><br><code>&lt;author&gt;lawyer@boyer.net (Lawyer Boyer)&lt;/author&gt;</code> 
+  <h2><a name="Commentaire"></a>5. Commentaires</h2>
+  <p>RSS place des restrictions sur le premier caractère qui ne soit pas 
+    un espace dans les données des éléments &lt;link&gt; et 
+    &lt;url&gt;. Les données dans ces éléments doivent débuter 
+    avec un schème URI <a href="http://www.iana.org/assignments/uri-schemes/">enregistré-IANA</a>, 
+    tels que http://, https://, news://, mailto: et ftp://. Avant RSS 2.0, la 
+    spécification permettait seulement http:// et ftp://, toutefois, en 
+    pratique les autres schèmes d'URI étaient utilisés par 
+    les développeurs de contenu et reconnus par les aggrégateurs. 
+    Les aggrégateurs peuvent avoir des limites quand aux schèmes 
+    d'URI qu'ils reconnaissant. Les développeurs de contenu ne devraient 
+    pas supposer que tous les aggrégateurs reconnaissent tous les schèmes.<br><br>
+    Dans RSS 0.91, différents éléments étaient restreints 
+    à 500 ou 100 caractères. Il ne pouvait pas y avoir plus de 15 
+    &lt;items&gt; dans un &lt;channel&gt; de 0.91. Il n'y a pas de longueur de chaîne 
+    ni de limite de niveau XML dans RSS 0.92 et suivants. Les agents de traitement 
+    peuvent imposer leurs propres limites, et les générateurs peuvent 
+    avoir des options spécifiant que pas plus d'un certain nombre d' &lt;item&gt;s 
+    peut apparaître dans un canal, ou que les chaînes ont une longueur 
+    limitée.<br><br>
+    Dans RSS 2.0, <a name="syndic8"></a>les dispositions sont prises pour la liaison 
+    entre un canal et sont identifieur dans un système de catalogue, utilisant 
+    la fonctionnalité de catégorie au niveau canal, décrite 
+    ci-dessus. Par exemple, poue lier un canal à son identifier Syndic8, 
+    on inclut un élément catégorie comme sous élément 
+    de &lt;channel&gt;, avec pour domaine "Syndic8", et pour valeur l'identifieur 
+    du canal dans la base de données de Syndic8. L'élément 
+    de catégorie approprié pour Scripting News pourrait être 
+    &lt;category domain="Syndic8"&gt;1765&lt;/category&gt;.<br><br>
+    Une question fréquemment posée au sujet des &lt;guid&gt;s est 
+comment 
+    ils se comparent aux &lt;link&gt;s. Est-ce la même chose? Oui, pour 
+certains 
+    systèmes de contenu, et non pour d'autres. Pour certains systèmes, 
+    &lt;link&gt; est un permalien sur un item de weblog. Toutefois, dans
+ d'autres 
+    systèmes, chaque &lt;item&gt; est le synopsis d'un article plus 
+long, 
+    &lt;link&gt; pointe sur l'article, et &lt;guid&gt; est le permalien 
+sur l'entrée 
+    dans le weblog. Dans tous les cas, il est  recommandé que vous 
+fournissiez un guid, et si possible faites en  un permalien. Cela permet
+ aux aggrégateurs 
+    de ne pas répéter les items, même s'il y a eu des modifications 
+    d'édition.<br>
+    <br>
+    Si vous avez des questions au sujet du format RSS 2.0, postez les s'il vous 
+    plaît sur le forum <a href="http://tech.groups.yahoo.com/group/RSS2-Support/">RSS2-Support</a>, 
+    hébergée par Sjoerd Visscher. Ce n'est pas un forum de débat, 
+    mais sert de ressource de support aux utilisateurs, auteurs et développeurs 
+    qui créent et utilisent des contenus au format RSS 2.0.</p>
+  <h2><a name="Extension"></a>6. Etendre RSS</h2>
+  <p>RSS a été créé en 1999, avec l'ambition d'être 
+    un format simple et facile à comprendre, avec des buts relativement 
+    modestes. Après qu'il soit devenu un format populaire, les développeurs 
+    ont voulu l'étendre en utilisant des modules définis dans des 
+    espaces de noms, comme <a href="http://www.w3.org/TR/REC-xml-names/">spécifié</a> 
+    par le W3C. <br><br>
+    RSS 2.0 ajoute cette capacité, en suivant une règle simple. 
+    Un flux RSS peut contenir des éléments non décrits dans 
+    cette page, seulement si ces éléments sont définis dans 
+    un espace de nom. <br><br>
+    Les éléments définis dans ce document ne sont pas eux-mêmes 
+    membres d'un espace de nom, ainsi RSS 2.0 peut rester compatible avec les 
+    version précédentes sans le sens suivant -- un fichier de version 
+    0.91 ou 0.92 est aussi un fichier 2.0 valide. Si les éléments 
+    de RSS 2.0 se trouvaient dans un espace de nom, cette contrainte se trouverait 
+    brisée, un fichier de version 0.9x <i>ne pourrait pas</i> être 
+    un fichier 2.0 valide.</p>
+  <h2><a name="Futur"></a>7. Carnet de route</h2>
+  <p>RSS ne peut en aucune sorte être un format parfait, mais il est très 
+    populaire et largement reconnu. Disposer d'une spécification établie 
+    est quelque chose dont RSS avait besoin depuis longtemps. La finalité 
+    de ce travail est de l'aider à devenir quelque chose de standard, pour 
+    encourager l'accroissement du marché qui se développe autour 
+    de lui, et pour débroussailler un chemin pour l'innovation dans les 
+    nouveaux formats de syndication. Ainsi donc, la spécification RSS est, 
+    pour tous les emplois pratiques, gelée à la version 2.0.1. Nous 
+    prévoyons de possibles versions 2.0.2 ou 2.0.3 , etc. seulement pour 
+    le besoin de clarifier la spécification, et non pour ajouter de nouvelles 
+    fonctionnalités au format. Un ouvrage supplémentaire pourrait 
+    se faire sur des modules, en utilisant des espaces de noms, et dans des formats 
+    de syndication totalement nouveaux, portant de nouveaux noms.</p>
+  <h2><a name="Licence"></a>8. Licence</h2>
+  <p>RSS 2.0 est offert par Berkman Center for Internet &amp; Society at Harvard Law 
+    School sous les termes de la <a href="http://creativecommons.org/licenses/by-sa/1.0/">licence</a> 
+    Attribution/Share Alike Creative Commons . L'auteur du document original est 
+    Dave Winer, fondateur de UserLand software, et associé au Centre Berkman.<br></p>
+</div><div>
+ 
+  <p style="font-size:80%; color:#666; border-top:1px dotted #666;">Fin de traduction</p>
+  <p>Le contenu de cette traduction est offert selon les termes de la <a href="http://www.scriptol.fr/rss/Creative-Commons.html" target="_parent">licence</a> 
+    Attribution/Share Alike Creative Commons.</p>
+  <p><a href="http://creativecommons.org/licenses/by/1.0/" class="noborder"><img alt="Creative Commons License" src="RSS-2.0_fichiers/somerights20.png" border="0" height="31" width="88"></a></p>
+</div><div id="pasf">
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script><script src="RSS-2.0_fichiers/ga.js" type="text/javascript"></script><script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-6574971-1");
+pageTracker._trackPageview();
+} catch(err) {}
+</script></div>
+</body></html>

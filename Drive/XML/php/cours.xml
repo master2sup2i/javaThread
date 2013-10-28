@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="intro.xslt"?>
+<document>  
+  <questrep id="2">
+    <question>Que signifie DTD?</question>
+    <reponse>Document Type Definition.</reponse>
+  </questrep>
+  <questrep id="3">
+    <question>Que signifie XSL premier?</question>
+    <reponse>eXtensible Stylesheet language.</reponse>
+  </questrep> 
+  <questrep id="3">
+    <question>Que signifie XSL deuxième?</question>
+    <reponse>eXtensible Stylesheet language.</reponse>
+  </questrep> 
+  <questrep id="1">
+    <question>Que signifie XML?</question>
+    <reponse>eXtensible Markup language.</reponse>
+  </questrep>
+</document>

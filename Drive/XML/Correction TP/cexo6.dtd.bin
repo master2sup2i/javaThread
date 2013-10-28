@@ -1,0 +1,14 @@
+﻿<!ELEMENT livre (auteurs,sections)>
+<!ELEMENT auteurs (auteur+)>
+<!ELEMENT auteur EMPTY>
+<!ELEMENT sections (section+)>
+<!ELEMENT section (chapitre, chapitre+)>
+<!ELEMENT chapitre (paragraphe, paragraphe+)>
+<!ELEMENT paragraphe (#PCDATA)>
+<!ENTITY % titre "titre CDATA #REQUIRED">
+<!ATTLIST livre %titre;>
+<!ATTLIST section %titre;>
+<!ATTLIST chapitre %titre;>
+<!ATTLIST auteur 
+  nom CDATA #REQUIRED
+  prenom CDATA #REQUIRED>

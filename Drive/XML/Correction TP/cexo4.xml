@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE carnet SYSTEM "carnet.dtd">
+<carnet>
+  <personne nom="dupont" prenom="jean" telephone="010203"/>
+  <personne nom="dupond" telephone="040506"/>
+</carnet>
