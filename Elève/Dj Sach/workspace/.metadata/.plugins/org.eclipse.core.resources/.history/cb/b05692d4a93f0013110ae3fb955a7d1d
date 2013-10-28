@@ -1,0 +1,18 @@
+package TP5;
+
+public class TP5 {
+	 
+	 
+public int factorielle (int n) {
+
+int i;
+int a;
+int b;
+int fact=1;
+
+{for (i=1;i<=b;i++)
+a=a*i;
+}
+System.out.println("le factde"+"est"+a);
+}
+}
