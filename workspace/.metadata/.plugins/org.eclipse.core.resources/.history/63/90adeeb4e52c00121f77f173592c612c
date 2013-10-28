@@ -1,0 +1,11 @@
+package PremierTest;
+
+public class testing2 {
+
+
+
+	public static String listinverse(String S)
+	{
+	  return new StringBuffer(S).reverse().toString();
+	}
+}

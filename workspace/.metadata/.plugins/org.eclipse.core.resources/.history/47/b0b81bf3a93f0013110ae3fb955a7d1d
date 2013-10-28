@@ -1,0 +1,11 @@
+package TP5;
+
+public class MainTP5 {
+
+	
+	public static void main(String[] args) {
+		factorielle fact = new factorielle (3);
+
+	}
+
+}
