@@ -1,0 +1,29 @@
+package TP5;
+
+public class TP5Thread extends Thread {
+
+	int i,j,res,seuil;
+	
+	public int factThread(int i, int j, int seuil) {
+		
+		return res;
+		
+	}
+	
+	public void run (){
+		
+		if(j-i<=seuil){
+			res=1;
+			for (i=1;i<=seuil;i++){
+				res=res*i;
+			}
+		}
+		else{
+			int mid=(i+j)/2;
+			int T1,T2;
+			T1=new factThread(i,mid,seuil);
+			T2=new factThread(mid+1,j,seuil);
+			res = T1*T2;
+		}
+	}
+}

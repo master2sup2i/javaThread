@@ -1,0 +1,12 @@
+package PremierTest;
+
+public class testing 
+{ public static int fact (int i)}
+
+  { int j, f=1 ; 
+	for (j=1; j <=i; j++)
+	{ f = f*j; }
+	return (f);
+  }
+… ... // code de vos fonctions 
+}

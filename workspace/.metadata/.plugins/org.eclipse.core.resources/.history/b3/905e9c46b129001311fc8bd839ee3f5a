@@ -1,0 +1,14 @@
+package ProdConsoExo6;
+
+public class Produc extends Thread {
+    private Buffer buf;
+    private int nom;
+    public Produc(Buffer b, int n) {
+        buf = b; 
+        this.nom = n;
+    }
+    
+public void run() {
+
+    }
+}
