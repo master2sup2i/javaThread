@@ -1,0 +1,17 @@
+# Nom de l'écouteur et les adresses a écouter
+LISTENERCL =                  *** mon listener s'appelle LISTENERCL
+        ( ADDRESS_LIST =
+                (ADDRESS =
+                        (PROTOCOL=tcp)    *** j'utilise un protocole reseau tcpip
+                        (HOST=172.16.41.73)      *** adresse ip de la machine supportant la base
+                        (PORT=1521)       *** numero du port d'ecoute
+                 )
+         )
+# Liste des services désservis par l'écouteur
+SID_LIST_LISTENERCL=
+        (SID_LIST=
+                (SID_DESC=
+                        (SID_NAME=BASCLI)       *** SID de la base 
+                        (ORACLE_HOME=/home/oracle/9.2.0.7)  *** localisation noyau oracle
+                )
+         )
