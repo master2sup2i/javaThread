@@ -118,12 +118,12 @@ puts 'Autre méthode avec each'
 puts 'Exercice 11'
 
 contact1 = {
- "prenom" =>"Jimmy",
- "nom de famille" =>"Lafleur",
- "adresse" =>"Rue de l'eglise, 26",
- "ville" =>"La Tour du Pin",
+ "prenom" =>"Sacha",
+ "nom de famille" =>"MINARD",
+ "adresse" =>"1504, Route de Chambéry",
+ "ville" =>"Sain-Ismier",
  "province" =>"Isere",
- "code postal" => 38910
+ "code postal" => 38330
 }
 contact2 = {
  "prenom" =>"OK",
