@@ -1,18 +1,25 @@
 #include <stdio.h>
 #include <stdib.h>
 
-int main(void)
+int main()
 {
 
-float A,B,C;
+int A,B;
+float C;
+
 puts ("valeur de A:");
-scanf("%f",&A);
+scanf("%d",&A);
 
 puts ("valeur de B:");
-scanf("%f",&B);
+scanf("%d",&B);
 
-C=A*B;
-printf("C=%f\n",C);
+puts ("valeur de C:");
+scanf("%C", &C);
 
+double r;
+r = calcul(A,B,C);
 
+printf("Résultat : %d\n",r);
+
+return 0;
 } 
