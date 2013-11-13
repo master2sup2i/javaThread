@@ -3,23 +3,16 @@
 
 int main()
 {
-
 int A,B;
-float C;
+char C;
 
 puts ("valeur de A:");
-scanf("%d",&A);
-
-puts ("valeur de B:");
-scanf("%d",&B);
-
-puts ("valeur de C:");
-scanf("%C", &C);
+scanf("%d %c %d",&A &C,&B);
 
 double r;
 r = calcul(A,B,C);
 
-printf("Résultat : %d\n",r);
+printf("Résultat : %f\n",r);
 
 return 0;
 } 
