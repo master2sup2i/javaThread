@@ -35,6 +35,8 @@ s=s+line.to_i
 }
 f.close
 puts s
-
+*************hello World****************
 =end
+
+
 
